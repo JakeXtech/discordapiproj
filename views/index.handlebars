@@ -1,0 +1,21 @@
+<!-- views/index.hbs -->
+<div class="container">
+  <h1>Discord API</h1>
+  <div class="input-container">
+    <input type="text" id="command-input" placeholder="Enter command here..." />
+    <button id="generate-graphic-btn">Generate Graphic</button>
+  </div>
+  <div class="image-container">
+    {{#each images}}
+      <div class="image-result">
+        <img src="{{this}}" />
+        <button class="select-btn">Select</button>
+      </div>
+    {{/each}}
+  </div>
+  <div class="upscale-container">
+    <img src="{{upscaleImage}}" />
+    <button class="add-to-program-btn">Add to Program</button>
+    <button class="get-variations-btn">Get Variations</button>
+  </div>
+</div>
