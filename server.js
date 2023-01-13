@@ -4,7 +4,7 @@
 const express = require("express");
 
 // Require Handlebars
-const exphbs = require("express-handlebars");
+const handlebars = require("express-handlebars");
 
 // Require MySQL
 const mysql = require("mysql");
@@ -20,8 +20,9 @@ const app = express();
 const PORT = process.env.PORT || 8080;
 
 // Set Handlebars as the default templating engine.
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
+const hbs = handlebars.create({ defaultLayout: "main" });
+app.engine("handlebars", hbs.engine);
 
 // Create a connection to the database
 const connection = mysql.createConnection({
