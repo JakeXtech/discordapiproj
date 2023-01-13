@@ -3,6 +3,9 @@
 // Require Express
 const express = require("express");
 
+// Require Path
+const path = require("path");
+
 // Require Handlebars
 const handlebars = require("express-handlebars");
 
@@ -14,6 +17,10 @@ const Discord = require("discord.js");
 
 // Create an Express App
 const app = express();
+
+//Set public/static files directory
+app.use(express.static("app/public"));
+app.use(express.static(path.join(__dirname, "public")));
 
 // Set the port of our application
 // process.env.PORT lets the port be set by Heroku
@@ -28,7 +35,7 @@ app.engine("handlebars", hbs.engine);
 const connection = mysql.createConnection({
 	host: "localhost",
 	user: "root",
-	password: "",
+	password: "Tusc0n11!!22@@",
 	database: "discord_db",
 });
 
