@@ -1,22 +1,22 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 
-// Replace the value of 'token' with your bot token
+// Replace the value of 'token' with my bot token
 const token = "YOUR_BOT_TOKEN";
 
-// Replace the value of 'channelID' with the ID of the channel you want your bot to post in
+// Replace the value of 'channelID' with the ID of my MJ testing server channel you want your for the bot to send commands to
 const channelID = "YOUR_CHANNEL_ID";
 
-// Replace the value of 'commandPrefix' with the prefix you want to use for your bot commands
-const commandPrefix = "!";
+// Replace the value of 'commandPrefix' with the prefix to use for your the commands
+const commandPrefix = "/imagine";
 
-// Replace the value of 'upscaleButtonID' with the ID of the button you want your bot to click when you send the 'upscale' command
+// Replace the value of 'upscaleButtonID' with the ID of the button for bot to click when when send the 'upscale' command
 const upscaleButtonID = "YOUR_UPSCALE_BUTTON_ID";
 
-// Replace the value of 'variationsButtonID' with the ID of the button you want your bot to click when you send the 'variations' command
+// Replace the value of 'variationsButtonID' with the ID of the button for our bot to click when sending the 'variations' command
 const variationsButtonID = "YOUR_VARIATIONS_BUTTON_ID";
 
-// Replace the value of 'addToProgramButtonID' with the ID of the button you want your bot to click when you send the 'addToProgram' command
+// Replace the value of 'addToProgramButtonID' with the ID of the button for our bot to click when we send the 'addToProgram' command
 const addToProgramButtonID = "YOUR_ADD_TO_PROGRAM_BUTTON_ID";
 
 client.on("ready", () => {
