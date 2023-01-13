@@ -3,8 +3,8 @@ const mysql = require("mysql");
 const connection = mysql.createConnection({
 	host: "localhost",
 	user: "root",
-	password: "",
-	database: "mjdiscordapi",
+	password: "Tusc0n11!!22@@",
+	database: "mjdiscordapi_db",
 });
 
 connection.connect((err) => {

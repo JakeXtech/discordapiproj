@@ -13,7 +13,7 @@ const handlebars = require("express-handlebars");
 const mysql = require("mysql");
 
 // Require Discord
-// const Discord = require("discord.js");
+const Discord = require("discord.js");
 
 // Create an Express App
 const app = express();
@@ -32,27 +32,27 @@ const hbs = handlebars.create({ defaultLayout: "main" });
 app.engine("handlebars", hbs.engine);
 
 // Create a connection to the database
-// const connection = mysql.createConnection({
-// 	host: "localhost",
-// 	user: "root",
-// 	password: "",
-// 	database: "discord_db",
-// });
+const connection = mysql.createConnection({
+	host: "localhost",
+	user: "root",
+	password: "Tusc0n11!!22@@",
+	database: "discord_db",
+});
 
 // Make the connection to the database
-// connection.connect((err) => {
-// 	if (err) {
-// 		console.error("error connecting: " + err.stack);
-// 		return;
-// 	}
-// 	console.log("connected as id " + connection.threadId);
-// });
+connection.connect((err) => {
+	if (err) {
+		console.error("error connecting: " + err.stack);
+		return;
+	}
+	console.log("connected as id " + connection.threadId);
+});
 
 // Create a Discord Client
-// const client = new Discord.Client();
+const client = new Discord.Client();
 
 // Log our bot in
-// client.login("YOUR_TOKEN_HERE");
+client.login("YOUR_TOKEN_HERE");
 
 // Set up routes
 app.get("/", (req, res) => {
