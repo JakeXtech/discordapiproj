@@ -3,6 +3,8 @@ const Discord = require("discord.js");
 const { Client, MessageAttachment } = require("discord.js");
 const client = new Client();
 const axios = require("axios");
+const express = require("express");
+const router = express.Router();
 
 // Set up the Discord client
 client.on("ready", () => {
@@ -10,17 +12,18 @@ client.on("ready", () => {
 });
 
 // Set up the route for the index page
-exports.index = (req, res) => {
-	res.render("index", { title: "Discord API" });
-};
+
+router.get("/", (req, res) => {
+	res.render("index", { title: "Graphic Engine" });
+});
 
 // Set up the route for the post request
-exports.post = (req, res) => {
+router.post("/", (req, res) => {
 	// Get the command from the request body
 	const command = req.body.command;
 
 	// Send the command to the Discord server
-	client.channels.cache.get("<channel_id>").send(command);
+	client.channels.cache.get("1063625590604836904").send(command);
 
 	// Get the response from the Discord server
 	client.on("message", (message) => {
@@ -91,4 +94,6 @@ exports.post = (req, res) => {
 			});
 		}
 	});
-};
+});
+
+module.exports = router;

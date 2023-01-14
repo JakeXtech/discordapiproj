@@ -1,14 +1,16 @@
 const Discord = require("discord.js");
-const client = new Discord.Client();
+const client = new Discord.Client({
+	intents: Discord.Intents.ALL,
+});
 
 // Replace the value of 'token' with my bot token
-const token = "YOUR_BOT_TOKEN";
+const token = env.process.TOKEN;
 
 // Replace the value of 'channelID' with the ID of my MJ testing server channel you want your for the bot to send commands to
-const channelID = "YOUR_CHANNEL_ID";
+const channelID = "1063625590604836904";
 
 // Replace the value of 'commandPrefix' with the prefix to use for your the commands
-const commandPrefix = "/imagine";
+const commandPrefix = "/imagine prompt ";
 
 // Replace the value of 'upscaleButtonID' with the ID of the button for bot to click when when send the 'upscale' command
 const upscaleButtonID = "YOUR_UPSCALE_BUTTON_ID";
@@ -19,8 +21,18 @@ const variationsButtonID = "YOUR_VARIATIONS_BUTTON_ID";
 // Replace the value of 'addToProgramButtonID' with the ID of the button for our bot to click when we send the 'addToProgram' command
 const addToProgramButtonID = "YOUR_ADD_TO_PROGRAM_BUTTON_ID";
 
+//Event listener for when the bot is ready
+
 client.on("ready", () => {
 	console.log(`Logged in as ${client.user.tag}!`);
+});
+
+//Event listener for when the bot receives a message
+client.on("message", (message) => {
+	if (message == "Hey") {
+		message.reply("Hello!");
+		console.log("bot it getting messages and talking back. :thumbsup:");
+	}
 });
 
 client.on("message", (message) => {
