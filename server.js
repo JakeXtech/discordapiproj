@@ -12,8 +12,8 @@ const handlebars = require("express-handlebars");
 // Require MySQL
 const mysql = require("mysql");
 
-// Require Discord
-const Discord = require("discord.js");
+// Require discordbot.js
+const discordbot = require("./config/discordbot.js");
 
 // Create an Express App
 const app = express();
@@ -30,45 +30,6 @@ const PORT = process.env.PORT || 8080;
 app.set("view engine", "handlebars");
 const hbs = handlebars.create({ defaultLayout: "main" });
 app.engine("handlebars", hbs.engine);
-
-// Create a connection to the database
-// const connection = mysql.createConnection({
-// 	host: "localhost",
-// 	user: "root",
-// 	password: "Tusc0n11!!22@@",
-// 	database: "discord_db",
-// });
-
-// Make the connection to the database
-// connection.connect((err) => {
-// 	if (err) {
-// 		console.error("error connecting: " + err.stack);
-// 		return;
-// 	}
-// 	console.log("connected as id " + connection.threadId);
-// });
-
-// Create a Discord Client
-// const client = new Discord.Client({
-// 	intents: Discord.GatewayIntentBits.All,
-// });
-
-const { Client, GatewayIntentBits } = require("discord.js");
-const { env } = require("process");
-
-const client = new Client({
-	intents: [
-		GatewayIntentBits.Guilds,
-		GatewayIntentBits.GuildMessages,
-		GatewayIntentBits.MessageContent,
-		GatewayIntentBits.GuildMembers,
-	],
-});
-
-// Log our bot in
-client.login(
-	"MTA2MzU0MTU3MTg2NzM3NzcwNQ.GlD5Ea.bBKN9XuC2ct9BT1lbK_E8bxx2CL7WajIS5h_9U"
-);
 
 // Set up routes
 app.get("/", (req, res) => {
