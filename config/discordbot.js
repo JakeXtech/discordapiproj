@@ -3,6 +3,8 @@ const Discord = require("discord.js");
 const fs = require("fs");
 const path = require("path");
 const axios = require("axios");
+const express = require("express");
+const router = express.Router();
 
 // Bring in dotenv to get the bot token from the .env file
 require("dotenv").config();
@@ -46,29 +48,14 @@ client.on(Events.MessageUpdate, (oldMessage, newMessage) => {
 		}
 	});
 });
-//Shitty event listener that is a mess
-// client.on(Events.MessageUpdate, (oldMessage, newMessage) => {
-// 	newMessage.attachments.forEach((attachment) => {
-// 		if (attachment.url && newMessage.editedTimestamp) {
-// 			clearTimeout(timer);
-// 			timer = setTimeout(() => {
-// 				// Use tmp package to create a temp directory
-// 				console.log(
-// 					"This is the edited timestamp:" + newMessage.editedTimestamp
-// 				);
-// 				//download the image at attachment.url and save it to the temp directory
-// 				request(attachment.url)
-// 					.pipe(
-// 						fs.createWriteStream(`temp/image${newMessage.editedTimestamp}.webp`)
-// 					)
-// 					.on("close", () => {
-// 						console.log("Image downloaded to temp directory");
-// 						//convert webp to png
-// 						convertWebpToPng("/temp", "/outPNGs");
-// 					});
-// 			}, 14000);
-// 		}
-// 	});
-// });
 
+// Post route for sending commands to the Discord server
+router.post("/", (req, res) => {
+	const command = req.body.command;
+	// Use the command to post the text in the discord server
+	client.channels.cache.get("1063625590604836904").send(command);
+	res.send("Command sent to discord server: " + command);
+});
+
+module.exports = router;
 module.exports = client;

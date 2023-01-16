@@ -7,6 +7,7 @@ const discordbot = require("./config/discordbot.js");
 const app = express();
 const port = process.env.PORT || 3001;
 const fs = require("fs-extra");
+const router = express.Router();
 
 //Set public/static files directory
 app.use(express.static(path.join(__dirname, "public")));
