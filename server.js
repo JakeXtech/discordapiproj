@@ -1,30 +1,15 @@
 // server.js
-
-// Require Express
 const express = require("express");
-
-// Require Path
 const path = require("path");
-
-// Require Handlebars
 const handlebars = require("express-handlebars");
-
-// Require MySQL
 const mysql = require("mysql");
-
-// Require discordbot.js
 const discordbot = require("./config/discordbot.js");
-
-// Create an Express App
 const app = express();
+const port = process.env.PORT || 3001;
+const fs = require("fs-extra");
 
 //Set public/static files directory
-app.use(express.static("/public"));
 app.use(express.static(path.join(__dirname, "public")));
-
-// Set the port of our application
-// process.env.PORT lets the port be set by Heroku
-const PORT = process.env.PORT || 8080;
 
 // Set Handlebars as the default templating engine.
 app.set("view engine", "handlebars");
@@ -36,8 +21,19 @@ app.get("/", (req, res) => {
 	res.render("index");
 });
 
+//route for get request for all image in botdownloads folder
+app.get("/images", (req, res) => {
+	const directoryPath = path.join(__dirname, "public/botdownloads");
+	const files = [];
+	fs.readdir(directoryPath, (err, files) => {
+		if (err) {
+			return console.log("Unable to scan directory: " + err);
+		}
+		res.json(files);
+	});
+});
+
 // Start our server so that it can begin listening to client requests.
-app.listen(PORT, () => {
-	// Log (server-side) when our server has started
-	console.log(`Server listening on: http://localhost:${PORT}`);
+app.listen(port, () => {
+	console.log(`Server started on port ${port}`);
 });

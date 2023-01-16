@@ -5,6 +5,7 @@ const client = new Client();
 const axios = require("axios");
 const express = require("express");
 const router = express.Router();
+const fs = require("fs-extra");
 
 // Set up the Discord client
 client.on("ready", () => {
@@ -15,6 +16,19 @@ client.on("ready", () => {
 
 router.get("/", (req, res) => {
 	res.render("index", { title: "Graphic Engine" });
+});
+
+//route for get request for all image in botdownloads folder
+app.get("/botdownloads", (req, res) => {
+	const directoryPath = path.join(__dirname, "public/botdownloads");
+	fs.readdir(directoryPath, (err, files) => {
+		if (err) {
+			return console.log("Unable to scan directory: " + err);
+		}
+		files.forEach((file) => {
+			res.sendFile(path.join(directoryPath, file));
+		});
+	});
 });
 
 // Set up the route for the post request
