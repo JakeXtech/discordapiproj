@@ -53,7 +53,7 @@ client.on(Events.MessageUpdate, (oldMessage, newMessage) => {
 router.post("/", (req, res) => {
 	const command = req.body.command;
 	// Use the command to post the text in the discord server
-	client.channels.cache.get("1063625590604836904").send(command);
+	client.channels.cache.get("1063538236900782223").send(command);
 	res.send("Command sent to discord server: " + command);
 });
 
