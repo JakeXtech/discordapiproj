@@ -4,10 +4,16 @@ const path = require("path");
 const handlebars = require("express-handlebars");
 const mysql = require("mysql");
 const discordbot = require("./config/discordbot.js");
-const app = express();
 const port = process.env.PORT || 3001;
 const fs = require("fs-extra");
 const router = express.Router();
+const axios = require("axios");
+const cors = require("cors");
+const { spawn } = require("child_process");
+
+const app = express();
+app.use(cors());
+app.use(express.json());
 
 //Set public/static files directory
 app.use(express.static(path.join(__dirname, "public")));
@@ -32,6 +38,15 @@ app.get("/images", (req, res) => {
 		}
 		res.json(files);
 	});
+});
+
+//post route to send command from "generate-graphic-btn" event handler in script.js to python script
+app.post("/runPythonScript", (req, res) => {
+	let command = req.body.command;
+	const pyProg = spawn("python", ["/py/discord_bot.py"]);
+	pyProg.stdin.write(command + "\n");
+	pyProg.stdin.end();
+	res.json({ message: "Python script is running" });
 });
 
 // Start our server so that it can begin listening to client requests.

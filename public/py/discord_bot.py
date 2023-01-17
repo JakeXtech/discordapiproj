@@ -1,5 +1,5 @@
-import os
 import sys
+import os
 import time
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -17,14 +17,6 @@ driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 options = webdriver.ChromeOptions()
 options.add_argument('--headless=False')
 
-# Quick Nav to Google test
-# driver.get('http://google.com/')
-# time.sleep(1)  # Let the user actually see something!
-# search_box = driver.find_element('name', 'q')
-# time.sleep(1)
-# search_box.send_keys('ChromeDriver')
-# search_box.submit()
-# time.sleep(1)  # Let the user actually see something!
 
 # Navigate to Discord
 driver.get('https://discord.com/login')
@@ -67,7 +59,8 @@ print(active_element.get_attribute("outerHTML"))
 time.sleep(1)
 
 # Send input to the active element
-command = sys.stdin.realine().strip()
+# command = sys.stdin.readline().strip()
+prompt = "Old woman in mercedes benz convertible on a mountain road"
 
 active_element.send_keys("/")
 time.sleep(1)
@@ -75,7 +68,7 @@ active_element.send_keys("i")
 time.sleep(1)
 active_element.send_keys(Keys.ENTER)
 time.sleep(1)
-active_element.send_keys(command)
+active_element.send_keys(prompt)
 time.sleep(300/1000)
 active_element.send_keys(Keys.SPACE)
 time.sleep(300/1000)

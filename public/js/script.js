@@ -1,10 +1,10 @@
 const generateBtn = document.querySelector("#generate-graphic-btn");
 generateBtn.addEventListener("click", function () {
-	const { spawn } = require("child_process");
-	const pyProg = spawn("python", ["/py/discord_bot.py"]);
 	let command = document.querySelector("#command-input").value;
-	pyProg.stdin.write(command + "\n");
-	pyProg.stdin.end();
+	axios
+		.post("/runPythonScript", { command: command })
+		.then((response) => console.log(response.data))
+		.catch((error) => console.log(error));
 });
 
 // function to retrieve the images from the server
