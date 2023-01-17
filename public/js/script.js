@@ -1,33 +1,11 @@
-document
-	.querySelector("#generate-graphic-btn")
-	.addEventListener("click", function () {
-		const commandInput = document.querySelector("#command-input").value;
-		// Send the command to the server
-		fetch("/", {
-			method: "POST",
-			body: JSON.stringify({
-				command: commandInput,
-			}),
-			headers: {
-				"Content-Type": "application/json",
-			},
-		})
-			.then((response) => response.json())
-			.then((output) => {
-				// Send the command to the discord bot
-				axios
-					.post("/discordbot", {
-						command: commandInput,
-					})
-					.then((response) => {
-						console.log("Command sent to discord bot: " + commandInput);
-					})
-					.catch((error) => {
-						console.log(error);
-					});
-			})
-			.catch((error) => console.log(error));
-	});
+const generateBtn = document.querySelector("#generate-graphic-btn");
+generateBtn.addEventListener("click", function () {
+	const { spawn } = require("child_process");
+	const pyProg = spawn("python", ["/py/discord_bot.py"]);
+	let command = document.querySelector("#command-input").value;
+	pyProg.stdin.write(command + "\n");
+	pyProg.stdin.end();
+});
 
 // function to retrieve the images from the server
 function getImages() {
