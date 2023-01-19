@@ -34,6 +34,7 @@ client.once(Events.ClientReady, () => {
 	console.log(`Logged in as ${client.user.tag}!`);
 });
 
+//Event listener for message updates to download webp image file
 client.on(Events.MessageUpdate, (oldMessage, newMessage) => {
 	newMessage.attachments.forEach((attachment) => {
 		if (attachment.url) {
@@ -47,14 +48,6 @@ client.on(Events.MessageUpdate, (oldMessage, newMessage) => {
 			);
 		}
 	});
-});
-
-// Post route for sending commands to the Discord server
-router.post("/", (req, res) => {
-	const command = req.body.command;
-	// Use the command to post the text in the discord server
-	client.channels.cache.get("1063538236900782223").send(command);
-	res.send("Command sent to discord server: " + command);
 });
 
 module.exports = router;

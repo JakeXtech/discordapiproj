@@ -1,8 +1,11 @@
 const generateBtn = document.querySelector("#generate-graphic-btn");
 generateBtn.addEventListener("click", function () {
-	let command = document.querySelector("#command-input").value;
+	// let command = document.querySelector("#command-input").value;
 	axios
-		.post("/runPythonScript", { command: command })
+		.post(
+			"/runPythonScript"
+			// , { command: command }
+		)
 		.then((response) => console.log(response.data))
 		.catch((error) => console.log(error));
 });

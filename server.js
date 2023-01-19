@@ -8,12 +8,15 @@ const port = process.env.PORT || 3001;
 const fs = require("fs-extra");
 const router = express.Router();
 const axios = require("axios");
+const bodyParser = require("body-parser");
 const cors = require("cors");
-const { spawn } = require("child_process");
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //Set public/static files directory
 app.use(express.static(path.join(__dirname, "public")));
@@ -40,14 +43,35 @@ app.get("/images", (req, res) => {
 	});
 });
 
-//post route to send command from "generate-graphic-btn" event handler in script.js to python script
-app.post("/runPythonScript", (req, res) => {
-	let command = req.body.command;
-	const pyProg = spawn("python", ["/py/discord_bot.py"]);
-	pyProg.stdin.write(command + "\n");
-	pyProg.stdin.end();
-	res.json({ message: "Python script is running" });
+const spawner = require("child_process").spawn;
+const promptCommand = "test output command";
+
+app.post("/runPythonScript", async (req, res) => {
+	const pythonProcess = spawner("python", [
+		path.join(__dirname, "public/py/discord_bot.py"),
+		promptCommand,
+	]);
+	console.log("Data sent to python script:", promptCommand);
+
+	let data = "";
+	pythonProcess.stdout.on("data", (part) => (data += part));
+	await new Promise((resolve) => pythonProcess.stdout.on("close", resolve));
+
+	console.log("Data send back from python script:", data.toString());
+	res.json({ message: "Python finished", data: data });
 });
+
+// app.post("/runPythonScript", (req, res) => {
+// 	const pythonProcess = spawner("python", [
+// 		path.join(__dirname, "public/py/discord_bot.py"),
+// 		promptCommand,
+// 	]);
+// 	console.log("Data sent to python script:", promptCommand);
+// 	pythonProcess.stdout.on("data", (data) => {
+// 		console.log("Data send back from python script:", data.toString());
+// 		res.json({ message: "Python script is running" });
+// 	});
+// });
 
 // Start our server so that it can begin listening to client requests.
 app.listen(port, () => {
