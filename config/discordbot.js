@@ -1,4 +1,4 @@
-// This file contains the code for the Discord bot that will be used to send commands to the MJ testing server
+// This file contains the code for the Discord bot that will be used to listen for message updates and download the webp image files that are posted as attachments in the message updates
 const Discord = require("discord.js");
 const fs = require("fs");
 const path = require("path");
@@ -34,7 +34,7 @@ client.once(Events.ClientReady, () => {
 	console.log(`Logged in as ${client.user.tag}!`);
 });
 
-//Event listener for message updates to download webp image file
+//Event listener for message updates to download webp image file when the other server's bot updates a message
 client.on(Events.MessageUpdate, (oldMessage, newMessage) => {
 	newMessage.attachments.forEach((attachment) => {
 		if (attachment.url) {
@@ -42,6 +42,7 @@ client.on(Events.MessageUpdate, (oldMessage, newMessage) => {
 			axios({ url: attachment.url, responseType: "stream" }).then(
 				(response) => {
 					response.data.pipe(
+						//Create a new file, use the message id as a guid for the file name
 						fs.createWriteStream(`public/botdownloads/${newMessage.id}.webp`)
 					);
 				}

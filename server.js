@@ -43,6 +43,7 @@ app.get("/images", (req, res) => {
 	});
 });
 
+//post route to run python script as child process and send it data variable from client
 const spawner = require("child_process").spawn;
 const promptCommand = "test output command";
 
@@ -60,18 +61,6 @@ app.post("/runPythonScript", async (req, res) => {
 	console.log("Data send back from python script:", data.toString());
 	res.json({ message: "Python finished", data: data });
 });
-
-// app.post("/runPythonScript", (req, res) => {
-// 	const pythonProcess = spawner("python", [
-// 		path.join(__dirname, "public/py/discord_bot.py"),
-// 		promptCommand,
-// 	]);
-// 	console.log("Data sent to python script:", promptCommand);
-// 	pythonProcess.stdout.on("data", (data) => {
-// 		console.log("Data send back from python script:", data.toString());
-// 		res.json({ message: "Python script is running" });
-// 	});
-// });
 
 // Start our server so that it can begin listening to client requests.
 app.listen(port, () => {
