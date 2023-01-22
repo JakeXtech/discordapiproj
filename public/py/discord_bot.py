@@ -85,15 +85,15 @@ text1 = "test output 1"
 text2 = "test output 2"
 text3 = "test output 3"
 
-data_to_send_back = "Message from python script: Hello."
-print("##### made it to commented out inputs/outputs")
-sys.stdout.flush()
-input = sys.argv[1]
-output = data_to_send_back
-print(output)
-sys.stdout.flush()
-print("##### made it to the send_keys steps")
-sys.stdout.flush()
+# data_to_send_back = "Message from python script: Hello."
+# print("##### made it to commented out inputs/outputs")
+# sys.stdout.flush()
+# input = sys.argv[1]
+# output = data_to_send_back
+# print(output)
+# sys.stdout.flush()
+# print("##### made it to the send_keys steps")
+# sys.stdout.flush()
 
 # Send the slash commands to the Discord server channel
 active_element.send_keys(text1)
